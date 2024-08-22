@@ -1,5 +1,7 @@
 package dev.ruchir.notes_lake.service.impl;
 
+import dev.ruchir.notes_lake.controller_advise.custom.InvalidNoteException;
+import dev.ruchir.notes_lake.controller_advise.custom.NoteAlreadyExistsException;
 import dev.ruchir.notes_lake.controller_advise.standard.ResourceNotFoundException;
 import dev.ruchir.notes_lake.dto.HandwrittenNoteDTO;
 import dev.ruchir.notes_lake.dto.TypedNoteDTO;
@@ -32,7 +34,15 @@ public class NoteServiceImpl implements NoteService {
     @Transactional
     @Override
     public HandwrittenNoteDTO createHandwrittenNote(HandwrittenNoteDTO dto) {
+        if (handwrittenNoteRepository.existsByTitle(dto.getTitle())) {
+            throw new NoteAlreadyExistsException("HandwrittenNote with title '" + dto.getTitle() + "' already exists.");
+        }
+
         HandwrittenNote handwrittenNote = noteMapper.toHandwrittenNoteEntity(dto);
+        if (handwrittenNote == null) {
+            throw new InvalidNoteException("Invalid data for HandwrittenNote.");
+        }
+
         HandwrittenNote savedNote = handwrittenNoteRepository.save(handwrittenNote);
         return noteMapper.toHandwrittenNoteDTO(savedNote);
     }
@@ -56,7 +66,15 @@ public class NoteServiceImpl implements NoteService {
     @Transactional
     @Override
     public TypedNoteDTO createTypedNote(TypedNoteDTO dto) {
+        if (typedNoteRepository.existsByTitle(dto.getTitle())) {
+            throw new NoteAlreadyExistsException("TypedNote with title '" + dto.getTitle() + "' already exists.");
+        }
+
         TypedNote typedNote = noteMapper.toTypedNoteEntity(dto);
+        if (typedNote == null) {
+            throw new InvalidNoteException("Invalid data for TypedNote.");
+        }
+
         TypedNote savedNote = typedNoteRepository.save(typedNote);
         return noteMapper.toTypedNoteDTO(savedNote);
     }

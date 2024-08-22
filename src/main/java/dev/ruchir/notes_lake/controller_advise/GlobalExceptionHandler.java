@@ -1,8 +1,10 @@
 package dev.ruchir.notes_lake.controller_advise;
 
-import dev.ruchir.notes_lake.controller_advise.standard.InvalidInputException;
+
+import dev.ruchir.notes_lake.controller_advise.custom.AttachmentException;
+import dev.ruchir.notes_lake.controller_advise.custom.InvalidNoteException;
+import dev.ruchir.notes_lake.controller_advise.custom.NoteAlreadyExistsException;
 import dev.ruchir.notes_lake.controller_advise.standard.ResourceNotFoundException;
-import dev.ruchir.notes_lake.controller_advise.standard.UnauthorizedAccessException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,30 +29,43 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(InvalidInputException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidInputException(
-            InvalidInputException ex, HttpServletRequest request) {
+    @ExceptionHandler(InvalidNoteException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidNoteException(
+            InvalidNoteException ex, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
-                "Bad Request",
+                "Invalid Note",
                 ex.getMessage(),
                 request.getRequestURI()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UnauthorizedAccessException.class)
-    public ResponseEntity<ErrorResponse> handleUnauthorizedAccessException(
-            UnauthorizedAccessException ex, HttpServletRequest request) {
+    @ExceptionHandler(NoteAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleNoteAlreadyExistsException(
+            NoteAlreadyExistsException ex, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
-                HttpStatus.UNAUTHORIZED.value(),
-                "Unauthorized",
+                HttpStatus.CONFLICT.value(),
+                "Conflict",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AttachmentException.class)
+    public ResponseEntity<ErrorResponse> handleAttachmentException(
+            AttachmentException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Attachment Error",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

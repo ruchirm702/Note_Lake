@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HandwrittenNoteRepository extends JpaRepository<HandwrittenNote, Long> {
+
+    // Method to check if a note with the given title exists
+    boolean existsByTitle(String title);
 }

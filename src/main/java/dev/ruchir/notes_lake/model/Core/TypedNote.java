@@ -1,5 +1,6 @@
 package dev.ruchir.notes_lake.model.Core;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -19,5 +20,8 @@ public class TypedNote extends BaseNote {
     @Lob
     private String textContent;
 
-    // Additional properties specific to typed notes
+    @Column(name = "title", unique = true, nullable = false)
+    private String title;
+
+
 }
