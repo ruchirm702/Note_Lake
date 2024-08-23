@@ -209,6 +209,34 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    // Handles exceptions related to note sharing issues (500 Internal Server Error)
+    @ExceptionHandler(NoteSharingException.class)
+    public ResponseEntity<ErrorResponse> handleNoteSharingException(
+            NoteSharingException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Note Sharing Error",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // Handles exceptions related to user group issues (500 Internal Server Error)
+    @ExceptionHandler(UserGroupException.class)
+    public ResponseEntity<ErrorResponse> handleUserGroupException(
+            UserGroupException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "User Group Error",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     // Handles any other unexpected exceptions (500 Internal Server Error)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(
