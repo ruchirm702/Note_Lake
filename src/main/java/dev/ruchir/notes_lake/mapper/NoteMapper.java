@@ -10,10 +10,7 @@ import org.mapstruct.Mapper;
 public interface NoteMapper {
 
     HandwrittenNoteDTO toHandwrittenNoteDTO(HandwrittenNote handwrittenNote);
-
     HandwrittenNote toHandwrittenNoteEntity(HandwrittenNoteDTO handwrittenNoteDTO);
-
     TypedNoteDTO toTypedNoteDTO(TypedNote typedNote);
-
     TypedNote toTypedNoteEntity(TypedNoteDTO typedNoteDTO);
 }

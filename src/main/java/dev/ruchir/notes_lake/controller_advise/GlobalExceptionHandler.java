@@ -1,9 +1,7 @@
 package dev.ruchir.notes_lake.controller_advise;
 
 
-import dev.ruchir.notes_lake.controller_advise.custom.AttachmentException;
-import dev.ruchir.notes_lake.controller_advise.custom.InvalidNoteException;
-import dev.ruchir.notes_lake.controller_advise.custom.NoteAlreadyExistsException;
+import dev.ruchir.notes_lake.controller_advise.custom.*;
 import dev.ruchir.notes_lake.controller_advise.standard.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -67,6 +65,58 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(NoMatchingResultsException.class)
+    public ResponseEntity<ErrorResponse> handleNoMatchingResultsException(
+            NoMatchingResultsException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "No Matching Results",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FilterCriteriaException.class)
+    public ResponseEntity<ErrorResponse> handleFilterCriteriaException(
+            FilterCriteriaException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Filter Criteria",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TagNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTagNotFoundException(
+            TagNotFoundException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "Tag Not Found",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SearchServiceException.class)
+    public ResponseEntity<ErrorResponse> handleSearchServiceException(
+            SearchServiceException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Search Service Error",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(
