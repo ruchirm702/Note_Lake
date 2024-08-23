@@ -19,9 +19,6 @@ public class TypedNote extends BaseNote {
     @Lob
     private String textContent;
 
-    @Column(name = "title", unique = true, nullable = false)
-    private String title;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "typed_note_tags",

@@ -14,4 +14,5 @@ public class HandwrittenNoteDTO extends BaseNoteDTO {
     private String imageFileUrl;
     private FileType fileType;
     private Set<TagDTO> tags;
+    private Set<String> tagNames;
 }

@@ -1,6 +1,5 @@
 package dev.ruchir.notes_lake.model.Core;
 
-
 import dev.ruchir.notes_lake.model.enums.FileType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,9 +22,6 @@ public class HandwrittenNote extends BaseNote {
 
     @Enumerated(EnumType.STRING)
     private FileType fileType;
-
-    @Column(name = "title", unique = true, nullable = false)
-    private String title;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

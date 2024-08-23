@@ -39,7 +39,7 @@ public class SearchController {
     public ResponseEntity<List<HandwrittenNoteDTO>> filterHandwrittenNotes(
             @RequestParam String title,
             @RequestParam(required = false) String tag,
-            @RequestParam LocalDate startDate,
+            @RequestParam   LocalDate startDate,
             @RequestParam LocalDate endDate) {
         List<HandwrittenNoteDTO> notes = searchService.filterHandwrittenNotes(title, tag, startDate, endDate);
         return new ResponseEntity<>(notes, HttpStatus.OK);

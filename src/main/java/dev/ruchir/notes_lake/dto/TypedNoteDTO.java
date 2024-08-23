@@ -11,4 +11,5 @@ public class TypedNoteDTO extends BaseNoteDTO {
 
     private String textContent;
     private Set<TagDTO> tags;
+    private Set<String> tagNames;
 }
