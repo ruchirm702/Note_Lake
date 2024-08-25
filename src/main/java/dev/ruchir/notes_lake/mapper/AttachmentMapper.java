@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface AttachmentMapper {
 
@@ -17,6 +19,10 @@ public interface AttachmentMapper {
     @Mapping(target = "handwrittenNote", ignore = true)
     @Mapping(target = "typedNote", ignore = true)
     Attachment toAttachmentEntity(AttachmentDTO attachmentDTO);
+
+    List<AttachmentDTO> toAttachmentDTO(List<Attachment> attachments);
+
+    List<Attachment> toAttachmentEntity(List<AttachmentDTO> attachmentDTOs);
 
     default Long getNoteId(Attachment attachment) {
         if (attachment.getHandwrittenNote() != null) {
