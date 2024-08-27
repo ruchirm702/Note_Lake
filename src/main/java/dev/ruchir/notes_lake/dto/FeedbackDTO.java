@@ -15,8 +15,9 @@ public class FeedbackDTO {
 
     private Long id;
     private String comment;
-    private int rating; // Optional
-    private Long userId; // ID of the user who gave feedback
-    private Long noteId; // ID of the note (either handwritten or typed) associated with the feedback
+    private int rating;
+    private Long userId;
+    private Long handwrittenNoteId; // ID for handwritten note (if applicable)
+    private Long typedNoteId; // ID for typed note (if applicable)
     private LocalDateTime submittedAt;
 }
