@@ -45,180 +45,180 @@ notes_lake
     └── interface
 
 ```
-
 ## 🛠️ Services Overview
 
-### VersioningService
-Handles the creation and retrieval of note versions.
+### 1. **VersioningService**
+*Handles the creation and retrieval of note versions.*
 
 **Endpoints:**
 
 - **POST /versioning/handwritten/{noteId}**
-  - Description: Creates a new version of a handwritten note.
-  - Request Body: `HandwrittenNoteDTO`
+  - **Description:** Creates a new version of a handwritten note.
+  - **Request Body:** `HandwrittenNoteDTO`
 
 - **POST /versioning/typed/{noteId}**
-  - Description: Creates a new version of a typed note.
-  - Request Body: `TypedNoteDTO`
+  - **Description:** Creates a new version of a typed note.
+  - **Request Body:** `TypedNoteDTO`
 
 - **GET /versioning/handwritten/{noteId}/history**
-  - Description: Retrieves the version history of a handwritten note.
+  - **Description:** Retrieves the version history of a handwritten note.
 
 - **GET /versioning/typed/{noteId}/history**
-  - Description: Retrieves the version history of a typed note.
+  - **Description:** Retrieves the version history of a typed note.
 
-### SharingService
-Manages sharing of notes between users and retrieves shared notes.
+### 2. **SharingService**
+*Manages sharing of notes between users and retrieves shared notes.*
 
 **Endpoints:**
 
 - **POST /sharing/handwritten/{noteId}/user/{userId}**
-  - Description: Shares a handwritten note with a specific user.
+  - **Description:** Shares a handwritten note with a specific user.
 
 - **POST /sharing/typed/{noteId}/user/{userId}**
-  - Description: Shares a typed note with a specific user.
+  - **Description:** Shares a typed note with a specific user.
 
 - **GET /sharing/handwritten/{userId}**
-  - Description: Retrieves handwritten notes shared with a specific user.
+  - **Description:** Retrieves handwritten notes shared with a specific user.
 
 - **GET /sharing/typed/{userId}**
-  - Description: Retrieves typed notes shared with a specific user.
+  - **Description:** Retrieves typed notes shared with a specific user.
 
-### TaggingService
-Handles tags for notes and retrieves notes by tag.
+### 3. **TaggingService**
+*Handles tags for notes and retrieves notes by tag.*
 
 **Endpoints:**
 
 - **POST /tagging/handwritten/{noteId}**
-  - Description: Adds tags to a handwritten note.
-  - Request Body: `List<String>`
+  - **Description:** Adds tags to a handwritten note.
+  - **Request Body:** `List<String>`
 
 - **POST /tagging/typed/{noteId}**
-  - Description: Adds tags to a typed note.
-  - Request Body: `List<String>`
+  - **Description:** Adds tags to a typed note.
+  - **Request Body:** `List<String>`
 
 - **GET /tagging/handwritten/{tag}**
-  - Description: Retrieves handwritten notes by a specific tag.
+  - **Description:** Retrieves handwritten notes by a specific tag.
 
 - **GET /tagging/typed/{tag}**
-  - Description: Retrieves typed notes by a specific tag.
+  - **Description:** Retrieves typed notes by a specific tag.
 
-### AttachmentService
-Manages attachments associated with notes.
+### 4. **AttachmentService**
+*Manages attachments associated with notes.*
 
 **Endpoints:**
 
 - **GET /attachments/{id}**
-  - Description: Retrieves an attachment by its ID.
+  - **Description:** Retrieves an attachment by its ID.
 
 - **GET /attachments**
-  - Description: Retrieves all attachments.
+  - **Description:** Retrieves all attachments.
 
 - **POST /attachments**
-  - Description: Saves a new attachment.
-  - Request Body: `AttachmentDTO`
+  - **Description:** Saves a new attachment.
+  - **Request Body:** `AttachmentDTO`
 
 - **DELETE /attachments/{id}**
-  - Description: Deletes an attachment by its ID.
+  - **Description:** Deletes an attachment by its ID.
 
-### SearchService
-Provides search and filtering capabilities for notes.
+### 5. **SearchService**
+*Provides search and filtering capabilities for notes.*
 
 **Endpoints:**
 
 - **GET /search/handwritten**
-  - Description: Searches for handwritten notes based on a query.
-  - Query Parameters: `query`
+  - **Description:** Searches for handwritten notes based on a query.
+  - **Query Parameters:** `query`
 
 - **GET /search/typed**
-  - Description: Searches for typed notes based on a query.
-  - Query Parameters: `query`
+  - **Description:** Searches for typed notes based on a query.
+  - **Query Parameters:** `query`
 
 - **GET /filter/handwritten**
-  - Description: Filters handwritten notes based on various criteria.
-  - Query Parameters: `title`, `tag`, `startDate`, `endDate`
+  - **Description:** Filters handwritten notes based on various criteria.
+  - **Query Parameters:** `title`, `tag`, `startDate`, `endDate`
 
 - **GET /filter/typed**
-  - Description: Filters typed notes based on various criteria.
-  - Query Parameters: `title`, `tag`, `startDate`, `endDate`
+  - **Description:** Filters typed notes based on various criteria.
+  - **Query Parameters:** `title`, `tag`, `startDate`, `endDate`
 
-### NoteService
-Manages creation, retrieval, and deletion of notes.
+### 6. **NoteService**
+*Manages creation, retrieval, and deletion of notes.*
 
 **Endpoints:**
 
 - **POST /notes/handwritten**
-  - Description: Creates a new handwritten note.
-  - Request Body: `HandwrittenNoteDTO`
+  - **Description:** Creates a new handwritten note.
+  - **Request Body:** `HandwrittenNoteDTO`
 
 - **GET /notes/handwritten/{id}**
-  - Description: Retrieves a handwritten note by its ID.
+  - **Description:** Retrieves a handwritten note by its ID.
 
 - **DELETE /notes/handwritten/{id}**
-  - Description: Deletes a handwritten note by its ID.
+  - **Description:** Deletes a handwritten note by its ID.
 
 - **POST /notes/typed**
-  - Description: Creates a new typed note.
-  - Request Body: `TypedNoteDTO`
+  - **Description:** Creates a new typed note.
+  - **Request Body:** `TypedNoteDTO`
 
 - **GET /notes/typed/{id}**
-  - Description: Retrieves a typed note by its ID.
+  - **Description:** Retrieves a typed note by its ID.
 
 - **DELETE /notes/typed/{id}**
-  - Description: Deletes a typed note by its ID.
+  - **Description:** Deletes a typed note by its ID.
 
-### FeedbackService
-Handles feedback related to notes.
+### 7. **FeedbackService**
+*Handles feedback related to notes.*
 
 **Endpoints:**
 
 - **POST /feedback**
-  - Description: Creates new feedback for a note.
-  - Request Body: `FeedbackDTO`
+  - **Description:** Creates new feedback for a note.
+  - **Request Body:** `FeedbackDTO`
 
 - **PUT /feedback/{id}**
-  - Description: Updates existing feedback.
-  - Request Body: `FeedbackDTO`
+  - **Description:** Updates existing feedback.
+  - **Request Body:** `FeedbackDTO`
 
 - **DELETE /feedback/{id}**
-  - Description: Deletes feedback by its ID.
+  - **Description:** Deletes feedback by its ID.
 
 - **GET /feedback/{id}**
-  - Description: Retrieves feedback by its ID.
+  - **Description:** Retrieves feedback by its ID.
 
 - **GET /feedback**
-  - Description: Retrieves all feedback entries.
+  - **Description:** Retrieves all feedback entries.
 
 - **GET /feedback/user/{userId}**
-  - Description: Retrieves feedback by user ID.
+  - **Description:** Retrieves feedback by user ID.
 
 - **GET /feedback/handwritten/{handwrittenNoteId}**
-  - Description: Retrieves feedback for a specific handwritten note.
+  - **Description:** Retrieves feedback for a specific handwritten note.
 
 - **GET /feedback/typed/{typedNoteId}**
-  - Description: Retrieves feedback for a specific typed note.
+  - **Description:** Retrieves feedback for a specific typed note.
 
-### NotificationService
-Manages notifications for users.
+### 8. **NotificationService**
+*Manages notifications for users.*
 
 **Endpoints:**
 
 - **POST /notifications**
-  - Description: Creates a new notification.
-  - Request Body: `NotificationDTO`
+  - **Description:** Creates a new notification.
+  - **Request Body:** `NotificationDTO`
 
 - **GET /notifications/{id}**
-  - Description: Retrieves a notification by its ID.
+  - **Description:** Retrieves a notification by its ID.
 
 - **GET /notifications/user/{userId}**
-  - Description: Retrieves all notifications for a specific user.
+  - **Description:** Retrieves all notifications for a specific user.
 
 - **PUT /notifications/{id}**
-  - Description: Updates an existing notification.
-  - Request Body: `NotificationDTO`
+  - **Description:** Updates an existing notification.
+  - **Request Body:** `NotificationDTO`
 
 - **DELETE /notifications/{id}**
-  - Description: Deletes a notification by its ID.
+  - **Description:** Deletes a notification by its ID.
+
 
 ## Package Descriptions
 
